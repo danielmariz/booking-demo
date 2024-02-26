@@ -34,13 +34,7 @@ To lint your code using ESLint, run:
 npm run lint
 ```
 
-This will check your TypeScript and JavaScript files for linting errors and warnings.
-
-To automatically fix some of the linting errors, you can run:
-```
-npm run lint --fix
-```
-This will attempt to fix linting errors where possible.
+This will check your TypeScript and JavaScript files for linting errors and warnings and will attempt to fix linting errors where possible.
 
 ## Testing
 

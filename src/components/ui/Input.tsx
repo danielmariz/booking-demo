@@ -1,5 +1,5 @@
-import { styled } from '@mui/system';
-import { COLOR_PALLETE } from '@utils/constants';
+import { styled } from '@mui/system'
+import { COLOR_PALLETE } from '@utils/constants'
 
 const { grey } = COLOR_PALLETE
 
@@ -29,7 +29,7 @@ const Input = styled('input')(
     &:focus-visible {
       outline: 0;
     }
-`,
-);
+`
+)
 
 export default Input

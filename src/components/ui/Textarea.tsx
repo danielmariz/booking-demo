@@ -1,12 +1,12 @@
-import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
-import { TextareaAutosizeProps } from '@mui/material/TextareaAutosize';
-import { styled } from '@mui/system';
-import { COLOR_PALLETE } from '@utils/constants';
+import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize'
+import { type TextareaAutosizeProps } from '@mui/material/TextareaAutosize'
+import { styled } from '@mui/system'
+import { COLOR_PALLETE } from '@utils/constants'
 
 const { grey } = COLOR_PALLETE
 
 const Textarea = styled(BaseTextareaAutosize)<TextareaAutosizeProps>(
-    ({ theme }) => `
+  ({ theme }) => `
     box-sizing: border-box;
     width: 100%;
     font-weight: 400;
@@ -31,7 +31,7 @@ const Textarea = styled(BaseTextareaAutosize)<TextareaAutosizeProps>(
     &:focus-visible {
       outline: 0;
     }
-  `,
-);
+  `
+)
 
 export default Textarea
