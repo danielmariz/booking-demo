@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import { type DateRangeProps } from '@components/Booking'
 
 const startDate = dayjs() as DateRangeProps
-const endDate = dayjs().add(1, 'day') as DateRangeProps
+const endDate = startDate.add(1, 'day') as DateRangeProps
 const guests = 2
 const description = 'text should be saved'
 const formatedStartDate = startDate.format(DATE_FORMAT)
@@ -73,7 +73,7 @@ describe('Booking Demo', () => {
         .should('not.exist')
     })
 
-    it.only('should update a booking', () => {
+    it('should update a booking', () => {
       cy.get('[data-testid="booking-details-0"]')
         .should('exist')
         .within(() => {
@@ -90,14 +90,18 @@ describe('Booking Demo', () => {
       // change data
       const newGuests = 5
       const newDescription = 'Should update booking description'
-
+      const newFormatedStartDate = startDate.add(5, 'day').format(DATE_FORMAT)
+      const newFormatedEndDate = endDate.add(10, 'day').format(DATE_FORMAT)
+      
+      cy.get('#\\:r1\\:').clear().type(newFormatedStartDate)
+      cy.get('#\\:r3\\:').clear().type(newFormatedEndDate)
       cy.get('#guests').type('{selectall}', { force: true }).type(newGuests.toString(), { force: true })
-      cy.get('[data-testid="booking-description"]').type('{selectall}', { force: true }).type(newDescription, { force: true })
+      cy.get('[data-testid="booking-description"]').clear().type(newDescription, { force: true })
       cy.get('#booking-submit').click({ force: true })
 
       cy.get('[data-testid="booking-details-0"]')
         .should('be.visible')
-        .should('have.text', `Guests ${newGuests} - Dates: ${formatedStartDate} - ${formatedEndDate}${newDescription}`)
+        .should('have.text', `Guests ${newGuests} - Dates: ${newFormatedStartDate} - ${newFormatedEndDate}${newDescription}`)
     })
   })
 })
