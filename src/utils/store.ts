@@ -19,7 +19,25 @@ export const useBookingsStore = create<BookinsState>()(
       (set) => ({
         bookins: [],
         editing: null,
-        create: (data) => set((state) => ({ bookins: [...state.bookins, data].sort((a,b) => +new Date(a.startDate) - +new Date(b.startDate)) })),
+        update: (data) => set((store) => {
+          if(store.editing) {
+            let updatedList = [...store.bookins]
+            const updatingBookingIndex = store.bookins.findIndex(booking => booking.id === data.id)
+            //prevent any issue
+            if(updatingBookingIndex !== -1){
+              updatedList = [
+                ...updatedList.slice(0, updatingBookingIndex),
+                data,
+                ...updatedList.slice(updatingBookingIndex + 1)
+              ]
+            }
+            return {
+              bookins: updatedList
+            }
+          } else {
+            return { bookins: [...store.bookins, data].sort((a,b) => +new Date(a.startDate) - +new Date(b.startDate)) }
+          }
+        }),
         remove: (bookingId) => set((store) => ({
           bookins: [...removeItemById(store.bookins, bookingId)]
         })),
@@ -29,22 +47,6 @@ export const useBookingsStore = create<BookinsState>()(
             editing: bookingToEdit
           }
         }),
-        update: (data) => set((store) => {
-          let updatedList = [...store.bookins]
-          const updatingBookingIndex = store.bookins.findIndex(booking => booking.id === data.id)
-          //prevent any issue
-          if(updatingBookingIndex !== -1){
-            updatedList = [
-              ...updatedList.slice(0, updatingBookingIndex),
-              data,
-              ...updatedList.slice(updatingBookingIndex + 1)
-            ]
-
-          }
-          return {
-            bookins: updatedList
-          }
-        })
       }),
       {
         name: 'bookins-storage',

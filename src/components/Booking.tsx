@@ -24,7 +24,6 @@ const defaultMinDate = dayjs(new Date()) as DateRangeProps
 
 export default function Booking() {
     //store events
-    const book = useBookingsStore(state => state.create)
     const edit = useBookingsStore(state => state.edit)
     const update = useBookingsStore(state => state.update)
     //store data
@@ -143,22 +142,14 @@ export default function Booking() {
         
         const [startDate, endDate] = dateRange as DateRange<DateRangeProps>
 
-        const newData = {
+        update({
+            id: editing ? editing.id : uuidv4(),
             startDate: startDate!.$d,
             endDate: endDate!.$d,
             description,
             guests,
-        }
+        })
         
-        editing 
-            ? update({
-                id: editing.id,
-                ...newData
-            })
-            : book({
-                id: uuidv4(),
-                ...newData
-            }!)
         // reset the dates and form
         resethandler(e)
     }

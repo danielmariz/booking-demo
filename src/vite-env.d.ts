@@ -11,7 +11,6 @@ type Booking = {
 interface BookinsState {
   bookins: Booking[]
   editing: Booking | null
-  create: (data:Booking) => void
   remove: (bookingId:Booking['id']) => void
   edit: (bookingId:Booking['id'] | null) => void
   update: (data:Booking) => void
