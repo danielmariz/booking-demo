@@ -29,9 +29,10 @@ const BookingsList = () => {
                         bookings.map((booking, index) => (
                             <ListItem data-testid={`booking-details-${index}`}
                                 key={booking.id}
+                                className='hover:bg-gray-50'
                                 secondaryAction={
-                                    <div className='space-x-2'>
-                                        <IconButton edge="start" aria-label="edit" onClick={() => { edit(booking.id) }}>
+                                    <div className='space-y-1 flex flex-col content-evenly sm:flex-row sm:space-x-4 sm:space-y-0'>
+                                        <IconButton edge="end" aria-label="edit" onClick={() => { edit(booking.id) }}>
                                             <EditIcon />
                                         </IconButton>
                                         <IconButton edge="end" aria-label="delete" onClick={() => { remove(booking.id) }}>
